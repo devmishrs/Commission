@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <style>
+    .main {
+      padding-top: 50px;
+      padding-right: 30px;
+      padding-bottom: 50px;
+      padding-left: 80px;
+    }
+
+    .width_n_height_input {
+      width: 50;
+      height: 45;
+    }
+
+    .form-control {
+      display: block;
+      width: 66% !important;
+
+    }
+
+    .main_button {
+      position: relative;
+      top: 40px;
+      height: 44px;
+      left: 40%;
+    }
+  </style>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+  <script src="/static/js/slab.js" type="text/javascript"></script>
+
+  <title>Commission</title>
+</head>
+
+<body>
+  <div class="main">
+    <form id="id_commission_form" action="/commission/" method='post'>
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="for_dist_id">Dist ID</label>
+          <input type="number" class="form-control" id="dist_id" placeholder="Enter Dist id" value={{form.dist_id}}>
+        </div>
+        <div class="form-group col-md-4">
+          <label for="for_comm_structure">Comm Structure</label>
+          <select id="id_comm_data" name="slab" class="form-control"></select>
+        </div>
+
+        <div id="heyyy">
+          <input type="submit" class="main_button" name="id_update_comm" value="Update Commission">
+        </div>
+      </div>
+    </form>
+
+    <hr>
+
+    <form id="is_main_commission_form" action="/post_create/" method="post">
+      {% csrf_token %}
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="for_zrupee">Zrupee(%)</label>
+            <input type="number" class="form-control change" id="id_zrupee_comm"max="81" min=0 value = "{{form.zrupee_comm}}" placeholder="Zrupee commission(%)">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="for_dist">Dist(%)</label>
+          <input type="number" disabled class="form-control" id="id_dist_comm" value="{{from.distributer_comm}}" placeholder="Dist commission(%)">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="for_sub_dist_id">Sub-dist(%)</label>
+          <input type="number" disabled class="form-control" id="id_sub_dist_comm" placeholder="Sub-dist commission(%)">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="for_dist_id">Marchant(%)</label>
+          <input type="number" class="form-control change" id="id_marchent_comm"  value="{{form.marchent_comm}}" placeholder="Marchant commission(%)">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="for_tds">TDS</label>
+          <input type="text" form="{{form.tds}}" class="form-control" id="id_tds_comm">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="for_vendor">Vendor ID</label>
+          <input type="text" class="form-control" id="vendor_id">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="for_gst">GST</label>
+          <input type="text" value="{{form.gst}}" class="form-control" id="id_gst", value="0">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="for_cust_fee">Cust Fee</label>
+          <input type="text" value="{{form.cust_fee}}" class="form-control" id="id_cust_fee">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="for_dists">Dist ID</label>
+          <input type="number" class="form-control" id="id_dists">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="for_vendor">Comm Type</label>
+          <!-- <input type="text" class="form-control" id="comm_type" > -->
+          <select disabled id="id_comm_type" class="form-control"></select>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="for_gst">Min Amout</label>
+          <input type="text" disabled class="form-control" id="id_min_amount" value="100">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="for_cust_fee">Max Amount</label>
+          <input type="text" disabled class="form-control" id="id_max_amount" value="200000">
+        </div>
+      </div>
+      <hr>
+      <div class="center">
+        <input type="submit" name="update_comm" class="main_button" value="Update Commission">
+      </div>
+
+    </form>
+  </div>
+
+
+
+
+</body>
+
+</html>
