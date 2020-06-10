@@ -32,6 +32,36 @@ $( document ).ready( function(){
     get_data_ajax(selected)
   });
 
+  $("#id_post_create").on('click', function(){
+    var data = {}
+    data['dist_id'] = $("#dist_id").val();
+    data['slab'] = $("#id_comm_data").val();
+    data['z_comm'] = $("#id_zrupee_comm").val();
+    data['c_comm'] = $("#id_dist_comm").val();
+    data['m_comm'] = $("#id_marchent_comm").val();
+    data['tds'] = $("#id_tds_comm").val();
+    data['gst'] = $("#id_gst").val();
+    data['cust_fee'] = $("#id_cust_fee").val()
+
+    var token = '{{csrf_token}}';
+    var form = $(this).closest("form");
+
+    $.ajax({
+      url:main_url+"/post_create/",
+      method: "post",
+      data:data,
+      success: function(data){
+        console.log("Data sent successfully.");
+        alert("Data saved successfully!");
+      }
+    });
+  });
+
+  $("#dist_id").on('change', function(){
+      var d = $("#dist_id").val()
+      $("#id_dists").val(d);
+  });
+
   $(".change").bind('keyup mouseup', function () {
     console.log(this.id);
     if (this.id == "id_zrupee_comm"){

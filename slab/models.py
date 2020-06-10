@@ -42,11 +42,14 @@ class Distributers(models.Model):
 
 class MakeCommission(models.Model):
     dist_id = models.IntegerField(unique=True, default=random.randrange(999,99999))
-    slab = models.ForeignKey(SlabDetails, on_delete=models.CASCADE)
+    slab = models.ForeignKey(SlabDetails, on_delete=models.SET_NULL, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     marchent_comm = models.ForeignKey(SetCommission, on_delete=models.SET_NULL, null=True, related_name="marchent_comm")
     distributer_comm = models.ForeignKey(SetCommission, on_delete=models.SET_NULL, null=True, related_name="distributer_comm")
     zrupee_comm = models.ForeignKey(SetCommission, on_delete=models.SET_NULL, null=True, related_name="zrupee_comm")
+    m_share = models.FloatField(null=True)
+    d_share = models.FloatField(null=True)
+    z_share = models.FloatField(null=True)
     tr_amount = models.FloatField(default=0.0)
 
     gst = models.CharField(max_length=55, default="0")

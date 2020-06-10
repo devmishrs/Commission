@@ -44,10 +44,15 @@ class CommissionView(View):
 class PostCreateCommission(View):
     def post(self, request):
         print("Here request is",request.POST)
-        form = forms.PostCommissionForm(request.POST)
-        print("Is Valid : ",form.is_valid())
-        if form.is_valid():
-            form.save()
-        else:
-            print("Post create error : ",form.errors)
-        return render(request, 'slab.html', {"form":form})
+        data = request.POST
+        comms, is_created = models.MakeCommission.objects.get_or_create(dist_id=data['dist_id'])
+        comms.slab_id = data['slab']
+        comms.m_share = data['m_comm']
+        comms.z_share = data['z_comm']
+        comms.d_share = data['c_comm']
+        comms.tds = data['tds']
+        comms.gst = data['gst']
+        comms.cust_fee = data['cust_fee']
+        comms.save()
+        print("data saved...")
+        return JsonResponse({"data":data})

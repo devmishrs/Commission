@@ -38,12 +38,3 @@ class MakeCommissionForm(forms.ModelForm):
         except Exception as e:
             print("Error is saving data : ",e)
             print("Error at : {}".format(sys.exc_info()[-1].tb_lineno))
-
-class PostCommissionForm(forms.ModelForm):
-    class Meta:
-        model = models.MakeCommission
-        fields = ('__all__')
-
-    def save(self):
-        print("This is cleaned data",self.cleaned_data)
-        pass
